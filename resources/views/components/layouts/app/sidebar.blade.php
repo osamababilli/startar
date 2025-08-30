@@ -22,7 +22,7 @@
 
             <flux:navlist.group :heading="__('Roles & Permissions')" class=" mt-2 grid  gap-2"> </flux:navlist.group>
 
-            <flux:navlist.group expandable :expanded="false" heading="Favorites" class="lg:grid">
+            <flux:navlist.group expandable :expanded="false" heading="Roles" class="lg:grid">
 
                 <flux:navlist.item icon="" :href="route('roles.index')"
                     :current="request()->routeIs('roles.index')" wire:navigate>{{ __('All Roles') }}
