@@ -23,7 +23,7 @@
             <div
                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                 <button type="button"
-                    class="flex items-center justify-center dark:bg-white dark:text-zinc-600 dark:hover:bg-zinc-300 hover:bg-zinc-300 text-white bg-zinc-700  focus:ring-4 focus:ring-zinc-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-zinc-600 dark:hover:bg-zinc-700 focus:outline-none dark:focus:ring-zinc-800">
+                    class="flex items-center justify-center dark:bg-white dark:text-white dark:hover:text-zinc-200 dark:hover:bg-zinc-300 hover:bg-zinc-300 text-white bg-zinc-700  focus:ring-4 focus:ring-zinc-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-zinc-600 dark:hover:bg-zinc-700 focus:outline-none dark:focus:ring-zinc-800">
                     <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd"
