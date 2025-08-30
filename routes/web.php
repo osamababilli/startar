@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
 
     // roles & permissions routes
     Route::get('roles', Index::class)->name('roles.index');
+    Route::get('roles/{role}', Index::class)->name('roles.edit');
 });
 
 require __DIR__ . '/auth.php';

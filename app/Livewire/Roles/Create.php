@@ -3,12 +3,13 @@
 namespace App\Livewire\Roles;
 
 use Livewire\Component;
-use Flux;
 
-class Index extends Component
+
+class Create extends Component
 {
+
     public function render()
     {
-        return view('livewire.roles.index');
+        return view('livewire.roles.create');
     }
 }
