@@ -3,12 +3,30 @@
 namespace App\Livewire\Roles;
 
 use Livewire\Component;
-use Flux;
+use Livewire\WithPagination;
+use Spatie\Permission\Models\Role;
+
 
 class Index extends Component
 {
+    use WithPagination;
+
+
+    public $search = '';
+    public $perPage = 1;
+
+
+
+    public function getData()
+    {
+
+        $query = Role::query();
+
+        return $query->where('name', 'like', '%' . $this->search . '%')->paginate($this->perPage);
+    }
     public function render()
     {
-        return view('livewire.roles.index');
+        $roles = $this->getData();
+        return view('livewire.roles.index', compact('roles'));
     }
 }
