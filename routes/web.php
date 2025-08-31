@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Roles\Create;
 use Livewire\Volt\Volt;
 use App\Livewire\Roles\Index;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,8 @@ Route::middleware(['auth'])->group(function () {
 
     // roles & permissions routes
     Route::get('roles', Index::class)->name('roles.index');
-    Route::get('roles/{role}', Index::class)->name('roles.edit');
+    Route::get('roles/create', Create::class)->name('roles.create');
+    // Route::get('roles/{role}', Index::class)->name('roles.edit');
 });
 
 require __DIR__ . '/auth.php';

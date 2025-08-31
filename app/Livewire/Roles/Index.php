@@ -13,7 +13,7 @@ class Index extends Component
 
 
     public $search = '';
-    public $perPage = 1;
+    public $perPage = 10;
 
 
 
@@ -22,6 +22,9 @@ class Index extends Component
 
         $query = Role::query();
 
+        if ($this->search) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        }
         return $query->where('name', 'like', '%' . $this->search . '%')->paginate($this->perPage);
     }
     public function render()
