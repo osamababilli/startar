@@ -54,7 +54,7 @@
                                 {{ $role->name }}</th>
 
                             <td class="px-4 py-3">{{ $role->guard_name }}</td>
-                            <td class="px-4 py-3 flex items-center justify-center">
+                            {{-- <td class="px-4 py-3 flex items-center justify-center">
                                 <button id="{{ $role->name }}-dropdown-button"
                                     data-dropdown-toggle="{{ $role->name }}-dropdown"
                                     class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-zinc-400 dark:hover:text-gray-100"
@@ -79,6 +79,44 @@
                                         <a href="#"
                                             class="block py-2 px-4 text-sm text-gray-700 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:text-gray-200 dark:hover:text-white">{{ __('Delete') }}</a>
                                     </div>
+                                </div>
+                            </td> --}}
+
+
+
+                            <td class="px-4 py-3 flex items-center justify-center">
+                                <div class="flex flex-row items-center justify-center gap-2">
+
+                                    <a href="{{ route('roles.edit', $role) }}"
+                                        class="flex items-center justify-center text-xs
+                                            hover:text-green-500 hover:bg-gray-200/25 hover:rounded-md
+                                            p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-square-pen-icon lucide-square-pen">
+                                            <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                            <path
+                                                d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+                                        </svg>
+                                    </a>
+
+
+                                    <a href="javascript:void(0)"
+                                        wire:click="$dispatch('delete-confirm', { id: {{ $role->id }} })"
+                                        class="flex items-center justify-center text-xs
+                                            hover:text-red-500 hover:bg-gray-200/25 hover:rounded-md
+                                            p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-trash-icon lucide-trash">
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                            <path d="M3 6h18" />
+                                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                        </svg>
+                                    </a>
+
                                 </div>
                             </td>
                         </tr>

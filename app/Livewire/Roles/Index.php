@@ -5,6 +5,7 @@ namespace App\Livewire\Roles;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
+use Livewire\Attributes\On;
 
 
 class Index extends Component
@@ -27,6 +28,17 @@ class Index extends Component
         }
         return $query->where('name', 'like', '%' . $this->search . '%')->paginate($this->perPage);
     }
+
+    #[On('delete-confirmted')]
+    public function delete_confirm(string $id)
+    {
+        // dd($id);
+        // $this->dispatch('delete-confirm');
+        $role = Role::find($id);
+        $role->delete();
+        $this->dispatch('deleted',  message: $role->name . '  ' . __('Role Deleted Successfully'), type: 'success');
+    }
+
     public function render()
     {
         $roles = $this->getData();

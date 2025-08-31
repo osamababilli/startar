@@ -27,7 +27,9 @@
                 <flux:navlist.item icon="" :href="route('roles.index')"
                     :current="request()->routeIs('roles.index')" wire:navigate>{{ __('All Roles') }}
                 </flux:navlist.item>
-
+                <flux:navlist.item icon="" :href="route('roles.create')"
+                    :current="request()->routeIs('roles.create')" wire:navigate>{{ __('Create New Role') }}
+                </flux:navlist.item>
 
 
             </flux:navlist.group>
