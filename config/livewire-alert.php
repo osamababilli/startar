@@ -13,7 +13,13 @@ return [
     'closeButton' => true,
     'heightAuto' => true,
     'padding' => '1rem',
-
+    // 'theme' => new Js(
+    //     '() => {
+    //         const isDark = document.documentElement.classList.contains("dark");
+    //         return isDark ? "dark" : "light";
+    //     }'
+    // ),
+    'theme' => 'auto',
     'confirmButtonText' => 'Yes',
     'cancelButtonText' => 'Cancel',
     'denyButtonText' => 'No',
@@ -21,13 +27,4 @@ return [
     'showConfirmButton' => false,
     'backdrop' => true,
 
-    'didOpen' => new Js(
-        '() => {
-            const isDark = () => document.documentElement.classList.contains("dark");
-
-            if (isDark()) {
-                Swal.theme = "dark" : "light";
-            }
-        }'
-    ),
 ];
