@@ -4,6 +4,8 @@ namespace App\Livewire\Roles;
 
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
+use Jantinnerezo\LivewireAlert\Enums\Position;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 
 class Create extends Component
@@ -24,7 +26,10 @@ class Create extends Component
             'guard_name' => $this->guardName
         ]);
 
-        $this->dispatch('created',  message: $role->name . '  ' . __('Role Created Successfully'), type: 'success');
+        // $this->dispatch('created',  message: $role->name . '  ' . __('Role Created Successfully'), type: 'success');
+        LivewireAlert::title($role->name . '  ' . __('Role Created Successfully'))
+            ->success()
+            ->show();
 
         $this->reset();
     }

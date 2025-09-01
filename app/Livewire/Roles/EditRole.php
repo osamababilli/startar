@@ -33,13 +33,15 @@ class EditRole extends Component
 
 
         // إذا تريد الإشعار يظهر بعد redirect
-        session()->flash('livewire_alert', [
-            'type' => 'success',
-            'title' => __('Role Updated Successfully'),
-        ]);
+        // session()->flash('saved', [
+        //     'title' =>  '' . $this->roleData->name . '  ' . __('Role Updated Successfully'),
+
+        // ]);
+
+        notify($this->roleName . '  ' . __('Role Created Successfully'), 'success');
 
         // redirect بعد الإشعار
-        redirect()->route('roles.index');
+        return redirect()->route('roles.index');
     }
 
 

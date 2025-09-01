@@ -1,11 +1,7 @@
 <?php
 
-/*
- * For more details about the configuration, see:
- * https://sweetalert2.github.io/#configuration
- */
-
 use Jantinnerezo\LivewireAlert\Enums\Position;
+use Illuminate\Support\Js;
 
 return [
     'position' => Position::TopEnd,
@@ -13,13 +9,25 @@ return [
     'toast' => true,
     'text' => null,
     'timerProgressBar' => true,
-
-    'padding' => '1rem',
+    'width' => 'auto',
     'closeButton' => true,
+    'heightAuto' => true,
+    'padding' => '1rem',
+
     'confirmButtonText' => 'Yes',
     'cancelButtonText' => 'Cancel',
     'denyButtonText' => 'No',
     'showCancelButton' => false,
     'showConfirmButton' => false,
     'backdrop' => true,
+
+    'didOpen' => new Js(
+        '() => {
+            const isDark = () => document.documentElement.classList.contains("dark");
+
+            if (isDark()) {
+                Swal.theme = "dark" : "light";
+            }
+        }'
+    ),
 ];

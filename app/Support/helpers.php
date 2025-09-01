@@ -1,49 +1,33 @@
 <?php
 
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
+
 if (! function_exists('notify')) {
     /**
      * دالة إشعارات موحدة وبسيطة
      *
      * @param string $message رسالة الإشعار
      * @param string $type نوع الإشعار (success, error, warning, info)
+     * @param bool $redirect هل تريد الإشعار يظهر بعد redirect
      */
-    function notify(string $message, string $type = 'success'): void
+    function notify(string $message, string $type = 'success', bool $redirect = true)
     {
-        // استخدام الجلسة فقط - الطريقة الأكثر أماناً
-        session()->flash('notify', [
-            'message' => $message,
-            'type' => $type,
-            'id' => uniqid('notify_'),
-            'timestamp' => now()->toISOString()
-        ]);
-    }
-}
+        if ($redirect) {
+            // إذا تريد الإشعار يظهر بعد redirect
+            session()->flash('saved', [
+                'title' => $message,
 
-// دوال مساعدة
-if (! function_exists('notifySuccess')) {
-    function notifySuccess(string $message): void
-    {
-        notify($message, 'success');
-    }
-}
+            ]);
+            return;
+        }
 
-if (! function_exists('notifyError')) {
-    function notifyError(string $message): void
-    {
-        notify($message, 'error');
-    }
-}
 
-if (! function_exists('notifyWarning')) {
-    function notifyWarning(string $message): void
-    {
-        notify($message, 'warning');
-    }
-}
+        // استخدام نوع الإشعار المطلوب بطريقة أبسط
+        $validTypes = ['success', 'error', 'warning', 'info'];
+        $alertType = in_array($type, $validTypes) ? $type : 'success';
 
-if (! function_exists('notifyInfo')) {
-    function notifyInfo(string $message): void
-    {
-        notify($message, 'info');
+        LivewireAlert::title($message)
+            ->{$alertType}()
+            ->show();
     }
 }

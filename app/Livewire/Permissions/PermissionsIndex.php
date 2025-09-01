@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Livewire\Roles;
+namespace App\Livewire\Permissions;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Permission\Models\Role;
-use Livewire\Attributes\On;
+use Spatie\Permission\Models\Permission;
 
-
-class Index extends Component
+class PermissionsIndex extends Component
 {
     use WithPagination;
 
@@ -21,7 +19,7 @@ class Index extends Component
     public function getData()
     {
 
-        $query = Role::query();
+        $query = Permission::query();
 
         if ($this->search) {
             $query->where('name', 'like', '%' . $this->search . '%');
@@ -41,7 +39,9 @@ class Index extends Component
 
     public function render()
     {
-        $roles = $this->getData();
-        return view('livewire.roles.index', compact('roles'));
+        $permissions = $this->getData();
+        return view('livewire.permissions.permissions-index', compact('permissions'));
+        //
+
     }
 }

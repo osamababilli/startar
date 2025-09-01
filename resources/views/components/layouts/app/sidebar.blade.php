@@ -22,7 +22,7 @@
 
             <flux:navlist.group :heading="__('Roles & Permissions')" class=" mt-2 grid  gap-2"> </flux:navlist.group>
 
-            <flux:navlist.group expandable :expanded="false" heading="Roles" class="lg:grid">
+            <flux:navlist.group expandable :expanded="false" heading="{{ __('Roles') }}" class="lg:grid">
 
                 <flux:navlist.item icon="" :href="route('roles.index')"
                     :current="request()->routeIs('roles.index')" wire:navigate>{{ __('All Roles') }}
@@ -34,6 +34,19 @@
 
             </flux:navlist.group>
 
+
+
+            <flux:navlist.group expandable :expanded="false" heading="{{ __('Permissions') }}" class="lg:grid">
+
+                <flux:navlist.item icon="" :href="route('permissions.index')"
+                    :current="request()->routeIs('permissions.index')" wire:navigate>{{ __('All Permissions') }}
+                </flux:navlist.item>
+                <flux:navlist.item icon="" :href="route('permissions.create')"
+                    :current="request()->routeIs('permissions.create')" wire:navigate>{{ __('Create New Permission') }}
+                </flux:navlist.item>
+
+
+            </flux:navlist.group>
 
         </flux:navlist>
 
@@ -77,7 +90,8 @@
                 <flux:menu.separator />
 
                 <flux:menu.radio.group>
-                    <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('Settings') }}
+                    <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>
+                        {{ __('Settings') }}
                     </flux:menu.item>
                 </flux:menu.radio.group>
 

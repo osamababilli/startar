@@ -17,7 +17,7 @@
             </script>
         @endif --}}
 
-        {{-- <livewire:notification /> --}}
+        <livewire:notification />
 
         {{-- @filamentStyles
         @filamentScripts --}}

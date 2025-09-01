@@ -1,14 +1,14 @@
 <div>
 
 
-    <flux:heading size="lg" class="text-zinc-900 dark:text-zinc-300 mb-4">{{ __('Create New Role') }}
+    <flux:heading size="lg" class="text-zinc-900 dark:text-zinc-300 mb-4">{{ __('Create New Permission') }}
     </flux:heading>
 
     <div class="max-w-2xl">
-        <form method="POST" wire:submit="createRole" class="flex flex-col gap-6">
+        <form method="POST" wire:submit="createPermission" class="flex flex-col gap-6">
             <!-- Role Name -->
-            <flux:input wire:model.blur="roleName" :label="__('Role Name')" type="text" required
-                placeholder="{{ __('Role Name') }}" />
+            <flux:input wire:model.blur="permissionName" :label="__('Permission Name')" type="text" required
+                placeholder="{{ __('Permission Name') }}" />
 
             <flux:select wire:model="guardName" :label="__('Guard Name')" placeholder="{{ __('Select Guard Name') }}">
 
