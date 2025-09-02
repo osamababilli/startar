@@ -4,15 +4,17 @@ namespace App\Livewire\Roles;
 
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
-use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Filament\Notifications\Notification;
+use Spatie\Permission\Models\Permission;
 use Jantinnerezo\LivewireAlert\Enums\Position;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 class EditRole extends Component
 {
 
 
     public $role, $roleName, $guardName, $roleData;
+    public $selectedPermissions = [];
 
     public function mount($role)
     {
@@ -21,15 +23,27 @@ class EditRole extends Component
         $this->roleData = $roleData;
         $this->roleName = $roleData->name;
         $this->guardName = $roleData->guard_name;
+        $this->selectedPermissions = $roleData->permissions->pluck('name')->toArray();
     }
 
     public function updateRole()
     {
+
+        $this->validate([
+            'roleName' => ['required', 'string', 'max:255', 'unique:roles,name,' . $this->roleData->id],
+            'guardName' => ['required', 'string', 'max:255'],
+            'selectedPermissions' => ['array'],
+            'selectedPermissions.*' => ['string', 'exists:permissions,name'],
+        ]);
+
+        // dd( $this->selectedPermissions);
         // تحديث البيانات
         $this->roleData->update([
             'name' => $this->roleName,
-            'guard_name' => $this->guardName
+            'guard_name' => $this->guardName,
+
         ]);
+        $this->roleData->syncPermissions($this->selectedPermissions);
 
 
         // إذا تريد الإشعار يظهر بعد redirect
@@ -43,10 +57,15 @@ class EditRole extends Component
         // redirect بعد الإشعار
         return redirect()->route('roles.index');
     }
+    public function getPermissions()
+    {
 
+        return Permission::where('guard_name', $this->guardName)->get();
+    }
 
     public function render()
     {
-        return view('livewire.roles.edit-role');
+        $pemissions = $this->getPermissions();
+        return view('livewire.roles.edit-role', compact('pemissions'));
     }
 }

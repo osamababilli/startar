@@ -15,7 +15,7 @@ class Index extends Component
 
     public $search = '';
     public $perPage = 10;
-
+    public $sortDirection = 'desc';
 
 
     public function getData()
@@ -26,7 +26,7 @@ class Index extends Component
         if ($this->search) {
             $query->where('name', 'like', '%' . $this->search . '%');
         }
-        return $query->where('name', 'like', '%' . $this->search . '%')->paginate($this->perPage);
+        return $query->where('name', 'like', '%' . $this->search . '%')->orderBy('created_at', $this->sortDirection)->paginate($this->perPage);
     }
 
     #[On('delete-confirmted')]

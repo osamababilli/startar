@@ -13,7 +13,7 @@ class PermissionsIndex extends Component
 
     public $search = '';
     public $perPage = 10;
-
+    public $sortDirection = 'desc';
 
 
     public function getData()
@@ -24,7 +24,7 @@ class PermissionsIndex extends Component
         if ($this->search) {
             $query->where('name', 'like', '%' . $this->search . '%');
         }
-        return $query->where('name', 'like', '%' . $this->search . '%')->paginate($this->perPage);
+        return $query->where('name', 'like', '%' . $this->search . '%')->orderBy('created_at', $this->sortDirection)->paginate($this->perPage);
     }
 
     #[On('delete-confirmted')]
@@ -32,7 +32,7 @@ class PermissionsIndex extends Component
     {
         // dd($id);؛
         // $this->dispatch('delete-confirm');
-        $role = Role::find($id);
+        $role = permission::find($id);
         $role->delete();
         $this->dispatch('deleted',  message: $role->name . '  ' . __('Role Deleted Successfully'), type: 'success');
     }
