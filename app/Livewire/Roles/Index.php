@@ -36,7 +36,9 @@ class Index extends Component
         // $this->dispatch('delete-confirm');
         $role = Role::find($id);
         $role->delete();
-        $this->dispatch('deleted',  message: $role->name . '  ' . __('Role Deleted Successfully'), type: 'success');
+        // $this->dispatch('deleted',  message: $role->name . '  ' . __('Role Deleted Successfully'), type: 'success');
+
+        notify($role->name . '  ' . __('Role Deleted Successfully'), 'success', false);
     }
 
     public function render()

@@ -5,6 +5,7 @@ namespace App\Livewire\Permissions;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Permission;
+use Livewire\Attributes\On;
 
 class PermissionsIndex extends Component
 {
@@ -32,9 +33,12 @@ class PermissionsIndex extends Component
     {
         // dd($id);؛
         // $this->dispatch('delete-confirm');
-        $role = permission::find($id);
-        $role->delete();
-        $this->dispatch('deleted',  message: $role->name . '  ' . __('Role Deleted Successfully'), type: 'success');
+        $permissions = permission::find($id);
+        $permissions->delete();
+
+        notify($permissions->name . '  ' . __('Permission Deleted Successfully'), 'success', false);
+
+        // $this->dispatch('deleted',  message: $role->name . '  ' . __('Role Deleted Successfully'), type: 'success');
     }
 
     public function render()

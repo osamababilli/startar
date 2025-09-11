@@ -21,7 +21,22 @@
             </flux:select>
 
 
-            <flux:label for="permissions" :value="__('Permissions')" class="mb-2" />
+            <!-- Select/Deselect All Button -->
+            <div x-data="{ selectAll: @entangle('selectAll') }" class="mb-2">
+                <flux:button type="button" variant="primary" size="sm" class="mb-2 w-full"
+                    @click="$wire.toggleSelectAllPermissions()">
+                    <span x-text="selectAll ? '{{ __('Deselect All') }}' : '{{ __('Select All') }}'"></span>
+                </flux:button>
+            </div>
+
+
+
+            <flux:heading size="md" class="text-zinc-900 dark:text-zinc-300">
+                {{ __(' Permissions') }}
+            </flux:heading>
+
+            <!-- Permissions List -->
+            <flux:separator variant="subtle" />
 
             <div
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-60 overflow-y-auto border border-zinc-200 dark:border-zinc-700 rounded-lg  p-4">

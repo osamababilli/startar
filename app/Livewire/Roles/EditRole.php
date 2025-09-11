@@ -15,6 +15,7 @@ class EditRole extends Component
 
     public $role, $roleName, $guardName, $roleData;
     public $selectedPermissions = [];
+    public $selectAll = false;
 
     public function mount($role)
     {
@@ -51,13 +52,9 @@ class EditRole extends Component
         $this->roleData->syncPermissions($this->selectedPermissions);
 
 
-        // إذا تريد الإشعار يظهر بعد redirect
-        // session()->flash('saved', [
-        //     'title' =>  '' . $this->roleData->name . '  ' . __('Role Updated Successfully'),
 
-        // ]);
 
-        notify($this->roleName . '  ' . __('Role Created Successfully'), 'success');
+        notify(__('Role Created Successfully'), 'success');
 
         // redirect بعد الإشعار
         return redirect()->route('roles.index');
@@ -67,6 +64,20 @@ class EditRole extends Component
 
         return Permission::where('guard_name', $this->guardName)->get();
     }
+
+
+
+    public function toggleSelectAllPermissions()
+    {
+        $this->selectAll = !$this->selectAll;
+
+        if ($this->selectAll) {
+            $this->selectedPermissions = $this->getPermissions()->pluck('name')->toArray();
+        } else {
+            $this->selectedPermissions = [];
+        }
+    }
+
 
     public function render()
     {

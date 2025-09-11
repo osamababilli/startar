@@ -15,6 +15,7 @@ class Create extends Component
     public $roleName = '';
     public $guardName = '';
     public $selectedPermissions = [];
+    public $selectAll = false;
 
     public function createRole()
     {
@@ -43,6 +44,17 @@ class Create extends Component
         $this->reset();
     }
 
+
+    public function toggleSelectAllPermissions()
+    {
+        $this->selectAll = !$this->selectAll;
+
+        if ($this->selectAll) {
+            $this->selectedPermissions = $this->getPermissions()->pluck('name')->toArray();
+        } else {
+            $this->selectedPermissions = [];
+        }
+    }
 
     public function getPermissions()
     {

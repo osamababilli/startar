@@ -37,7 +37,7 @@ class PermissionsEdit extends Component
         ]);
 
         //إذا تريد الإشعار يظهر بعد redirect
-        notify($this->PermissionName . '  ' . __('Permission Updated Successfully'), 'success', false);
+        notify(__('Permission Updated Successfully'), 'success', false);
     }
 
     public function render()
