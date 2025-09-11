@@ -33,16 +33,21 @@ class EditRole extends Component
             'roleName' => ['required', 'string', 'max:255', 'unique:roles,name,' . $this->roleData->id],
             'guardName' => ['required', 'string', 'max:255'],
             'selectedPermissions' => ['array'],
-            'selectedPermissions.*' => ['string', 'exists:permissions,name'],
+            'selectedPermissions.*' => ['string', 'nullable', 'exists:permissions,name'],
         ]);
+        // $this->selectedPermissions = array_map('trim', $this->selectedPermissions);
 
-        // dd( $this->selectedPermissions);
+        //dd($this->selectedPermissions);
+
+
+
         // تحديث البيانات
         $this->roleData->update([
             'name' => $this->roleName,
             'guard_name' => $this->guardName,
 
         ]);
+
         $this->roleData->syncPermissions($this->selectedPermissions);
 
 
