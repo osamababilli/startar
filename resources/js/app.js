@@ -4,95 +4,8 @@ import Swal from "sweetalert2";
 window.Swal = Swal;
 
 document.addEventListener("livewire:init", () => {
-    Livewire.on("created", (e) => {
-        const isDark = document.documentElement.classList.contains("dark");
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 2000,
-            width: "auto",
-            padding: "0.8rem",
-            fontSize: "0.6rem",
-            theme: isDark ? "dark" : "light",
-            timerProgressBar: true,
-            customClass: {
-                icon: "w-[50px] h-[50px]",
-                title: "text-sm",
-            },
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            },
-        });
-
-        Toast.fire({
-            icon: e.type,
-            title: e.message,
-        });
-    });
-
-    Livewire.on("success", (e) => {
-        const isDark = document.documentElement.classList.contains("dark");
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 2000,
-            width: "auto",
-            padding: "0.8rem",
-
-            theme: isDark ? "dark" : "light",
-            timerProgressBar: true,
-            customClass: {
-                icon: "w-[50px] h-[50px]",
-                title: "text-sm",
-            },
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            },
-        });
-
-        Toast.fire({
-            icon: e.type,
-            title: e.message,
-        });
-    });
-
-    Livewire.on("deleted", (e) => {
-        const isDark = document.documentElement.classList.contains("dark");
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 2000,
-            width: "auto",
-            padding: "0.8rem",
-            fontSize: "0.6rem",
-            theme: isDark ? "dark" : "light",
-            timerProgressBar: true,
-            customClass: {
-                icon: "w-[50px] h-[50px]",
-                title: "text-sm",
-            },
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            },
-        });
-
-        Toast.fire({
-            icon: e.type,
-            title: e.message,
-        });
-    });
-
     Livewire.on("delete-confirm", (e) => {
-        const isDark = document.documentElement.classList.contains("dark");
+        console.log(e[0].id); // يطبع الـ ID والرسالة
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -105,60 +18,23 @@ document.addEventListener("livewire:init", () => {
         });
         swalWithBootstrapButtons
             .fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                title: e[0].title,
+                text: e[0].message,
                 icon: "warning",
                 showCancelButton: true,
-                theme: isDark ? "dark" : "light",
+                theme: "auto",
                 confirmButtonText: "Yes, delete it!",
                 cancelButtonText: "No, cancel!",
                 reverseButtons: true,
             })
             .then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.dispatch("delete-confirmted", { id: e.id });
-                    // console.log(e.id);
-                    // swalWithBootstrapButtons.fire({
-                    //     title: "Deleted!",
-                    //     theme: isDark ? "dark" : "light",
-                    //     text: "Your file has been deleted.",
-                    //     icon: "success",
-                    // });
+                    Livewire.dispatch("delete-confirmted", { id: e[0].id });
                 }
             });
     });
 });
 
-// const Toast = Swal.mixin({
-//     toast: true,
-//     position: "top",
-//     showConfirmButton: false,
-//     timer: 3000,
-//     wdidth: "auto",
-//     timerProgressBar: true,
-//     showCloseButton: true, // إضافة زر الإغلاق (X)
-//     CloseButton: true,
-//     didOpen: (toast) => {
-//         toast.onmouseenter = Swal.stopTimer;
-//         toast.onmouseleave = Swal.resumeTimer;
-//     },
-// });
-
-// window.addEventListener("success", (event) => {
-//     Toast.fire({
-//         icon: event.detail[0].type,
-//         title: event.detail[0].message,
-//     });
-
-//     const modal = document.querySelector(
-//         "body > div.transition-all.fixed.inset-0.z-40.bg-gray-900.bg-opacity-50.dark\\:bg-opacity-80"
-//     );
-//     if (modal) {
-//         modal.classList.add("hidden");
-//     }
-// });
-
-// document.addEventListener("DOMContentLoaded", () => {
 //     const isDark = document.documentElement.classList.contains("dark");
 
 //     const Toast = Swal.mixin({

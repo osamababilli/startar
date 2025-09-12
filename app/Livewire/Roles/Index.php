@@ -29,17 +29,33 @@ class Index extends Component
         return $query->where('name', 'like', '%' . $this->search . '%')->orderBy('created_at', $this->sortDirection)->paginate($this->perPage);
     }
 
-    #[On('delete-confirmted')]
-    public function delete_confirm(string $id)
+    public function delete(string $id)
     {
-        // dd($id);؛
-        // $this->dispatch('delete-confirm');
+
+        confermeDelete(
+            $this,
+            __('Are you sure'),
+            __('Are you sure you want to delete this role?'),
+            $id
+        );
+    }
+
+    #[On('delete-confirmted')]
+    public function deleteConfirmted(string $id)
+    {
+
+
         $role = Role::find($id);
         $role->delete();
         // $this->dispatch('deleted',  message: $role->name . '  ' . __('Role Deleted Successfully'), type: 'success');
 
         notify($role->name . '  ' . __('Role Deleted Successfully'), 'success', false);
     }
+
+
+
+
+
 
     public function render()
     {

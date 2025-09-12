@@ -1,5 +1,6 @@
 <?php
 
+use Jantinnerezo\LivewireAlert\Enums\Position;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 if (! function_exists('notify')) {
@@ -29,5 +30,11 @@ if (! function_exists('notify')) {
         LivewireAlert::title($message)
             ->{$alertType}()
             ->show();
+    }
+
+    function confermeDelete($component, $title, $message,  $itemId)
+    {
+
+        $component->dispatch('delete-confirm', ['id' => $itemId, 'message' => $message, 'title' => $title]);
     }
 }

@@ -171,8 +171,7 @@
                                     </a>
 
 
-                                    <a href="javascript:void(0)"
-                                        wire:click="$dispatch('delete-confirm', { id: {{ $role->id }} })"
+                                    <a href="javascript:void(0)" wire:click="delete('{{ $role->id }}')"
                                         class="flex items-center justify-center text-xs
                                             hover:text-red-500 hover:bg-gray-200/25 hover:rounded-md
                                             p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
