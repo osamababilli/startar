@@ -41,44 +41,45 @@
                 </div>
 
                 <!-- زر الترتيب -->
-                <div class="w-full md:w-auto">
-                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
+                <div x-data="{ open: false }" class="w-full md:w-auto relative">
+                    <!-- زر الفلترة -->
+                    <button @click="open = !open"
                         class="w-full md:w-auto flex items-center justify-center gap-2
-                       py-2 px-4 text-sm font-medium
-                       text-zinc-900 bg-white border border-zinc-200
-                       rounded-lg hover:bg-zinc-100 hover:text-primary-700
-                       focus:outline-none focus:ring-2 focus:ring-zinc-200
-                       dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-600
-                       dark:hover:bg-zinc-700 dark:hover:text-white">
+                        py-2 px-4 text-sm font-medium
+                        text-zinc-900 bg-white border border-zinc-200
+                        rounded-lg hover:bg-zinc-100 hover:text-primary-700
+                        focus:outline-none focus:ring-2 focus:ring-zinc-200
+                        dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-600
+                        dark:hover:bg-zinc-700 dark:hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4 text-zinc-400"
                             viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011
-                      1v3a1 1 0 01-.293.707L12 11.414V15a1
-                      1 0 01-.293.707l-2 2A1 1 0 018
-                      17v-5.586L3.293 6.707A1 1 0 013
-                      6V3z" clip-rule="evenodd" />
+                            1v3a1 1 0 01-.293.707L12 11.414V15a1
+                            1 0 01-.293.707l-2 2A1 1 0 018
+                            17v-5.586L3.293 6.707A1 1 0 013
+                            6V3z" clip-rule="evenodd" />
                         </svg>
                         {{ __('Sort By') }}
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                             aria-hidden="true">
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414
-                      0L10 10.586l3.293-3.293a1 1 0
-                      111.414 1.414l-4 4a1 1 0 01-1.414
-                      0l-4-4a1 1 0 010-1.414z" />
+                            0L10 10.586l3.293-3.293a1 1 0
+                            111.414 1.414l-4 4a1 1 0 01-1.414
+                            0l-4-4a1 1 0 010-1.414z" />
                         </svg>
                     </button>
 
                     <!-- القائمة المنسدلة -->
-                    <div id="filterDropdown"
-                        class="z-10 hidden w-48 p-3 mt-2 bg-white rounded-lg shadow
-                    dark:bg-zinc-700">
+                    <div x-show="open" @click.outside="open = false" x-transition
+                        class="z-10 absolute w-48 p-3 mt-2 bg-white rounded-lg shadow
+                         dark:bg-zinc-700">
                         <div class="flex items-center mb-4">
                             <input checked id="default-radio-1" wire:model.live="sortDirection" type="radio"
                                 value="desc"
                                 class="w-4 h-4 text-blue-600 border-zinc-300
-                              focus:ring-blue-500 dark:focus:ring-blue-600
-                              dark:ring-offset-zinc-800 focus:ring-2
-                              bg-zinc-100 dark:bg-zinc-700 dark:border-zinc-600">
+                       focus:ring-blue-500 dark:focus:ring-blue-600
+                       dark:ring-offset-zinc-800 focus:ring-2
+                       bg-zinc-100 dark:bg-zinc-700 dark:border-zinc-600">
                             <label for="default-radio-1"
                                 class="ms-2 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                 {{ __('Descending') }}
@@ -87,9 +88,9 @@
                         <div class="flex items-center">
                             <input id="default-radio-2" wire:model.live="sortDirection" type="radio" value="asc"
                                 class="w-4 h-4 text-blue-600 border-zinc-300
-                              focus:ring-blue-500 dark:focus:ring-blue-600
-                              dark:ring-offset-zinc-800 focus:ring-2
-                              bg-zinc-100 dark:bg-zinc-700 dark:border-zinc-600">
+                       focus:ring-blue-500 dark:focus:ring-blue-600
+                       dark:ring-offset-zinc-800 focus:ring-2
+                       bg-zinc-100 dark:bg-zinc-700 dark:border-zinc-600">
                             <label for="default-radio-2"
                                 class="ms-2 text-sm font-medium text-zinc-900 dark:text-zinc-300">
                                 {{ __('Ascending') }}
@@ -97,6 +98,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="overflow-x-auto">
