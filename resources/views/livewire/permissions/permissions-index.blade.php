@@ -71,7 +71,7 @@
 
                     <!-- القائمة المنسدلة -->
                     <div x-show="open" @click.outside="open = false" x-transition
-                        class="z-10 absolute w-48 p-3 mt-2 bg-white rounded-lg shadow
+                        class="z-10 absolute ltr:right-0 rtl:left-0 w-48 p-3 mt-2 bg-white rounded-lg shadow
                          dark:bg-zinc-700">
                         <div class="flex items-center mb-4">
                             <input checked id="default-radio-1" wire:model.live="sortDirection" type="radio"
