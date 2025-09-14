@@ -11,20 +11,20 @@
 
             <flux:input wire:model.blur="Email" :label="__('Email')" type="text" placeholder="{{ __('Email') }}" />
 
-
-            <div>
-
-
-                <flux:select wire:model.live="guardName" :label="__('Guard Name')"
-                    placeholder="{{ __('Select Guard Name') }}">
+            <flux:selectmultiple wire:model.live="guardName" :label="__('Guard Name')"
+                placeholder="{{ __('Select Guard Name') }}">
 
 
-                    @foreach (array_keys(config('auth.guards')) as $guard)
-                        <flux:select.option>{{ $guard }}</flux:select.option>
-                    @endforeach
+                @foreach (array_keys(config('auth.guards')) as $guard)
+                    <option value="{{ $guard }}">{{ $guard }}</option>
+                @endforeach
 
-                </flux:select>
-            </div>
+            </flux:selectmultiple>
+
+
+
+
+
 
             <div class="flex items-center justify-end mt-4">
                 <flux:button type="submit" class="ml-4">
