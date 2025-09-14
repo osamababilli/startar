@@ -15,7 +15,7 @@
             <div>
 
 
-                <flux:select multiple wire:model.live="guardName" :label="__('Guard Name')"
+                <flux:select wire:model.live="guardName" :label="__('Guard Name')"
                     placeholder="{{ __('Select Guard Name') }}">
 
 
