@@ -25,7 +25,7 @@
 
                 <!-- زر إنشاء دور -->
                 <div class="w-full md:w-auto">
-                    <a href="{{ route('roles.create') }}"
+                    <a href="{{ route('users.create') }}"
                         class="w-full md:w-auto flex items-center justify-center gap-2
                   text-white bg-zinc-700 hover:bg-zinc-600
                   dark:bg-zinc-600 dark:hover:bg-zinc-700 dark:text-white
@@ -36,7 +36,7 @@
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2
                       0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                         </svg>
-                        {{ __('Create Role') }}
+                        {{ __('Create User') }}
                     </a>
                 </div>
 
@@ -141,8 +141,9 @@
                             <td class="px-4 py-3 ">
 
                                 <flux:badge as="button" variant="pill" size="lg">
-                                    {{ $user->roles->pluck('name')->join(', ') ?? __('None') }}
+                                    {{ $user->roles->isNotEmpty() ? $user->roles->pluck('name')->join(', ') : __('None') }}
                                 </flux:badge>
+
 
                             </td>
 

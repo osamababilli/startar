@@ -18,9 +18,11 @@ class PermissionsCreate extends Component
             'permissionName' => ['required', 'string', 'max:255', 'unique:roles,name'],
             'guardName' => ['required', 'string', 'max:255'],
         ]);
+        // this is to remove any leading or trailing spaces from the permission name before saving
+        $normailizedPermissionName = trim($this->permissionName);
 
         $role = Permission::create([
-            'name' => $this->permissionName,
+            'name' => $normailizedPermissionName,
             'guard_name' => $this->guardName
         ]);
 
