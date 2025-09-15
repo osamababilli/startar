@@ -7,11 +7,11 @@
 
         <div class="grid grid-cols-3 gap-6 ">
 
-            <flux:input wire:model.blur="Name" :label="__('Name')" type="text" placeholder="{{ __('Name') }}" />
+            <flux:input wire:model.blur="name" :label="__('Name')" type="text" placeholder="{{ __('Name') }}" />
 
-            <flux:input wire:model.blur="Email" :label="__('Email')" type="text" placeholder="{{ __('Email') }}" />
+            <flux:input wire:model.blur="email" :label="__('Email')" type="text" placeholder="{{ __('Email') }}" />
 
-            <flux:selectmultiple wire:model.live="guardName" :label="__('Guard Name')"
+            {{-- <flux:selectmultiple wire:model.live="guardName" :label="__('Guard Name')"
                 placeholder="{{ __('Select Guard Name') }}">
 
 
@@ -19,12 +19,17 @@
                     <option value="{{ $guard }}">{{ $guard }}</option>
                 @endforeach
 
-            </flux:selectmultiple>
+            </flux:selectmultiple> --}}
 
 
-            <flux:selectmultiple2 wire:model="grades" :options="$roles" :option-label="'name'"
-                :option-value="'id'" label="Grades" />
+            <flux:selectmultiple2 wire:model.live="selectedRoles"{{-- مرر القيمة الحالية كـ prop --}} :options="$roles"
+                :placeholder="__('Select User Roles')" :option-label="'name'" :option-value="'name'"
+                label="{{ __('User Roles') }}" />
 
+
+            <flux:selectmultiple2 wire:model="selectedRoles" :options="$roles"
+                :placeholder="__('Select User Roles')" option-label="name" option-value="name"
+                label="{{ __('User Roles') }}" />
 
 
 
