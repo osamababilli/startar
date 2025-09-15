@@ -22,6 +22,9 @@
             </flux:selectmultiple>
 
 
+            <flux:selectmultiple2 wire:model="grades" :options="$roles" :option-label="'name'"
+                :option-value="'id'" label="Grades" />
+
 
 
 

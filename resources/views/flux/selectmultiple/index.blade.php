@@ -8,7 +8,7 @@
    ])
 
    <div>
-       <flux:label class="block text-sm font-medium text-zinc-900 dark:text-zinc-300 ">
+       <flux:label class="block text-sm font-medium text-zinc-900 dark:text-white">
            {{ $label }}</flux:label>
        <!-- Select -->
        <select multiple=""
