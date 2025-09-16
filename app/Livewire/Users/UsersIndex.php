@@ -5,6 +5,7 @@ namespace App\Livewire\Users;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\On;
 
 class UsersIndex extends Component
 {
@@ -27,6 +28,28 @@ class UsersIndex extends Component
         return $query->where('name', 'like', '%' . $this->search . '%')->orderBy('created_at', $this->sortDirection)->paginate($this->perPage);
     }
 
+
+    public function delete(string $id)
+    {
+
+        confermeDelete(
+            $this,
+            __('Are you sure'),
+            __('Are you sure you want to delete this User?'),
+            $id
+        );
+    }
+
+    #[On('delete-confirmted')]
+    public function deleteConfirmted(string $id)
+    {
+
+
+        $User = User::find($id);
+        $User->delete();
+
+        notify($User->name . '  ' . __('Role Deleted Successfully'), 'success', false);
+    }
 
     public function render()
     {

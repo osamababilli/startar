@@ -9,35 +9,31 @@
 
             <flux:input wire:model.blur="name" :label="__('Name')" type="text" placeholder="{{ __('Name') }}" />
 
-            <flux:input wire:model.blur="email" :label="__('Email')" type="text" placeholder="{{ __('Email') }}" />
+            <flux:input wire:model.blur="email" :label="__('Email')" type="email" placeholder="{{ __('Email') }}" />
 
-            {{-- <flux:selectmultiple wire:model.live="guardName" :label="__('Guard Name')"
-                placeholder="{{ __('Select Guard Name') }}">
+            <flux:input wire:model.blur="phone" :label="__('Phone')" type="text"
+                placeholder="{{ __('Phone') }}" />
 
-
-                @foreach (array_keys(config('auth.guards')) as $guard)
-                    <option value="{{ $guard }}">{{ $guard }}</option>
-                @endforeach
-
-            </flux:selectmultiple> --}}
-
-
-            <flux:selectmultiple2 wire:model.live="selectedRoles"{{-- مرر القيمة الحالية كـ prop --}} :options="$roles"
+            <flux:selectmultiple2 wire:model.live="selectedRoles" :options="$roles"
                 :placeholder="__('Select User Roles')" :option-label="'name'" :option-value="'name'"
                 label="{{ __('User Roles') }}" />
 
 
-            <flux:selectmultiple2 wire:model="selectedRoles" :options="$roles"
-                :placeholder="__('Select User Roles')" option-label="name" option-value="name"
-                label="{{ __('User Roles') }}" />
+            <flux:input type="password" autocomplete="new-password" label="{{ __('Password') }}"
+                wire:model.blur="password" />
+
+            <flux:input type="password" label="{{ __('Password Confirmation') }}"
+                wire:model.blur="password_confirmation" />
+
+            <flux:button type="submit" class="hover:pointer">
+                {{ __('Create User') }}
+            </flux:button>
 
 
 
 
-            <div class="flex items-center justify-end mt-4">
-                <flux:button type="submit" class="ml-4">
-                    {{ __('Create User') }}
-                </flux:button>
+            <div class="flex items-center mt-4">
+
             </div>
         </div>
     </form>
