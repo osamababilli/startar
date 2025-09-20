@@ -9,10 +9,17 @@ use Spatie\Permission\Models\Role;
 
 class UserCreate extends Component
 {
+
     public $selectedRoles = [];
 
     public $password, $password_confirmation, $phone, $name, $email;
     public $UserStatus = true; // الحالة الافتراضية للمستخدم (نشط)
+
+    public function mount()
+    {
+        $this->authorize('create', User::class);
+    }
+
 
     protected $rules = [
         'name' => 'required|string|max:255',

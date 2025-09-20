@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class roles_permission extends Seeder
 {
@@ -12,55 +14,49 @@ class roles_permission extends Seeder
      */
     public function run(): void
     {
-        $roles = [
-            [
-                'name' => 'admin',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'super admin',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'user',
-                'guard_name' => 'web',
-            ]
+        // إنشاء الأدوار
+
+
+        $role =   Role::create(['name' => 'super admin', 'guard_name' => 'web']);
+
+        $permissions = [
+
+
+            'create user',
+            'edit user',
+            'delete user',
+            'view users',
+            'show user',
+
+
+            'create role',
+            'edit role',
+            'delete role',
+            'view roles',
+
+
+
+            'create permission',
+            'edit permission',
+            'delete permission',
+            'view permissions',
+
+
         ];
 
-        foreach ($roles as $role) {
-            \Spatie\Permission\Models\Role::create($role);
+        foreach ($permissions as $permission) {
+            \Spatie\Permission\Models\Permission::create(['name' => $permission, 'guard_name' => 'web']);
+            $role->givePermissionTo($permission);
         }
 
-        // $permissions = [
 
-        //     'create user',
-        //     'edit user',
-        //     'delete user',
-        //     'view user',
+        $user = \App\Models\User::create([
+            'name' => 'Super Admin',
+            'email' => 'test@example.com',
+            'password' => Hash::make('password'), // password
+            'status' => 'active',
+        ]);
 
-        //     'create role',
-        //     'edit role',
-        //     'delete role',
-        //     'view role',
-
-        //     'create permission',
-        //     'edit permission',
-        //     'delete permission',
-        //     'view permission',
-
-        //     'create category',
-        //     'edit category',
-        //     'delete category',
-        //     'view category',
-
-        //     'create product',
-        //     'edit product',
-        //     'delete product',
-        //     'view product',
-        // ];
-
-        // foreach ($permissions as $permission) {
-        //     \Spatie\Permission\Models\Permission::create(['name' => $permission, 'guard_name' => 'web']);
-        // }
+        $user->assignRole('super admin');
     }
 }

@@ -20,20 +20,22 @@
                 </flux:navlist.item>
             </flux:navlist.group>
 
-            <flux:navlist.group :heading="__('Users Management')" class=" mt-2 grid  gap-2"> </flux:navlist.group>
-            <flux:navlist.group expandable :expanded="false" heading="{{ __('Users') }}" class="lg:grid">
 
-                <flux:navlist.item icon="" :href="route('users.index')"
-                    :current="request()->routeIs('users.index')" wire:navigate>{{ __('All Users') }}
-                </flux:navlist.item>
-                <flux:navlist.item icon="" :href="route('users.create')"
-                    :current="request()->routeIs('users.create')" wire:navigate>{{ __('Create New User') }}
-                </flux:navlist.item>
+            @can('view users')
+                <flux:navlist.group :heading="__('Users Management')" class=" mt-2 grid  gap-2"> </flux:navlist.group>
+                <flux:navlist.group expandable :expanded="false" heading="{{ __('Users') }}" class="lg:grid">
 
+                    <flux:navlist.item icon="" :href="route('users.index')"
+                        :current="request()->routeIs('users.index')" wire:navigate>{{ __('All Users') }}
+                    </flux:navlist.item>
+                    @can('create user')
+                        <flux:navlist.item icon="" :href="route('users.create')"
+                            :current="request()->routeIs('users.create')" wire:navigate>{{ __('Create New User') }}
+                        </flux:navlist.item>
+                    @endcan
 
-            </flux:navlist.group>
-
-
+                </flux:navlist.group>
+            @endcan
             <flux:navlist.group :heading="__('Roles & Permissions')" class=" mt-2 grid  gap-2">
             </flux:navlist.group>
 
@@ -63,6 +65,7 @@
 
 
             </flux:navlist.group>
+
 
         </flux:navlist>
 

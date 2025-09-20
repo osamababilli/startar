@@ -7,7 +7,7 @@
     <div class="max-w-2xl">
         <form method="POST" wire:submit="updatePermission" class="flex flex-col gap-6">
             <!-- Role Name -->
-            <flux:input wire:model.blur="PermissionName" :label="__('Permission Name')" type="text" required
+            <flux:input wire:model="PermissionName" :label="__('Permission Name')" type="text" required
                 placeholder="{{ __('Permission Name') }}" />
 
             <flux:select disabled wire:model="guardName" :label="__('Guard Name')"

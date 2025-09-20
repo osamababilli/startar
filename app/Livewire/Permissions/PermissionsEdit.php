@@ -27,9 +27,12 @@ class PermissionsEdit extends Component
             'guardName' => ['required', 'string', 'max:255'],
         ]);
 
-        // this is to remove any leading or trailing spaces from the permission name before saving
-        $normailizedPermissionName = trim($this->permissionName);
 
+        // dd($this->PermissionName);
+        // this is to remove any leading or trailing spaces from the permission name before saving
+        $normailizedPermissionName = trim($this->PermissionName);
+
+        // dd($normailizedPermissionName);
         // تحديث البيانات
         $this->permissionData->update([
             'name' => $normailizedPermissionName,

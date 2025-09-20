@@ -17,6 +17,12 @@ class UsersIndex extends Component
     public $perPage = 10;
     public $sortDirection = 'desc';
 
+
+
+    public function mount()
+    {
+        $this->authorize('viewAny', User::class);
+    }
     public function getData()
     {
 
@@ -31,6 +37,8 @@ class UsersIndex extends Component
 
     public function delete(string $id)
     {
+        $this->authorize('delete', User::class);
+
 
         confermeDelete(
             $this,
