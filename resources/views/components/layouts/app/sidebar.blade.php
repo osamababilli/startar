@@ -36,35 +36,43 @@
 
                 </flux:navlist.group>
             @endcan
-            <flux:navlist.group :heading="__('Roles & Permissions')" class=" mt-2 grid  gap-2">
-            </flux:navlist.group>
 
-            <flux:navlist.group expandable :expanded="false" heading="{{ __('Roles') }}" class="lg:grid">
+            @if (auth()->user()->can('view roles') || auth()->user()->can('view permissions'))
+                <flux:navlist.group :heading="__('Roles & Permissions')" class=" mt-2 grid  gap-2">
+                </flux:navlist.group>
 
-                <flux:navlist.item icon="" :href="route('roles.index')"
-                    :current="request()->routeIs('roles.index')" wire:navigate>{{ __('All Roles') }}
-                </flux:navlist.item>
-                <flux:navlist.item icon="" :href="route('roles.create')"
-                    :current="request()->routeIs('roles.create')" wire:navigate>{{ __('Create New Role') }}
-                </flux:navlist.item>
+                <flux:navlist.group expandable :expanded="false" heading="{{ __('Roles') }}" class="lg:grid">
 
-
-            </flux:navlist.group>
-
-
-
-            <flux:navlist.group expandable :expanded="false" heading="{{ __('Permissions') }}" class="lg:grid">
-
-                <flux:navlist.item icon="" :href="route('permissions.index')"
-                    :current="request()->routeIs('permissions.index')" wire:navigate>{{ __('All Permissions') }}
-                </flux:navlist.item>
-                <flux:navlist.item icon="" :href="route('permissions.create')"
-                    :current="request()->routeIs('permissions.create')" wire:navigate>
-                    {{ __('Create New Permission') }}
-                </flux:navlist.item>
+                    <flux:navlist.item icon="" :href="route('roles.index')"
+                        :current="request()->routeIs('roles.index')" wire:navigate>{{ __('All Roles') }}
+                    </flux:navlist.item>
+                    @can('create role')
+                        <flux:navlist.item icon="" :href="route('roles.create')"
+                            :current="request()->routeIs('roles.create')" wire:navigate>{{ __('Create New Role') }}
+                        </flux:navlist.item>
+                    @endcan
 
 
-            </flux:navlist.group>
+
+                </flux:navlist.group>
+
+
+
+                <flux:navlist.group expandable :expanded="false" heading="{{ __('Permissions') }}"
+                    class="lg:grid">
+
+                    <flux:navlist.item icon="" :href="route('permissions.index')"
+                        :current="request()->routeIs('permissions.index')" wire:navigate>{{ __('All Permissions') }}
+                    </flux:navlist.item>
+
+                    @can('create permission')
+                        <flux:navlist.item icon="" :href="route('permissions.create')"
+                            :current="request()->routeIs('permissions.create')" wire:navigate>
+                            {{ __('Create New Permission') }}
+                        </flux:navlist.item>
+                    @endcan
+                </flux:navlist.group>
+            @endif
 
 
         </flux:navlist>

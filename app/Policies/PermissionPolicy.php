@@ -2,26 +2,26 @@
 
 namespace App\Policies;
 
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class RolePolicy
+class PermissionPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view roles');;
+        return $user->can('view permissions');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user): bool
+    public function view(User $user, Permission $permission): bool
     {
-        return $user->can('show role');
+        return $user->can('show permission');
     }
 
     /**
@@ -29,7 +29,7 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create role');
+        return $user->can('create permission');
     }
 
     /**
@@ -37,21 +37,22 @@ class RolePolicy
      */
     public function update(User $user): bool
     {
-        return $user->can('edit role');
+        return $user->can('edit permission');
     }
+
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user): bool
+    public function delete(User $user, Permission $permission): bool
     {
-        return $user->can('delete role');
+        return $user->can('delete permission');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user): bool
+    public function restore(User $user, Permission $permission): bool
     {
         return false;
     }
@@ -59,7 +60,7 @@ class RolePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user): bool
+    public function forceDelete(User $user, Permission $permission): bool
     {
         return false;
     }

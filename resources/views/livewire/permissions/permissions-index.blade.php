@@ -149,42 +149,51 @@
                             </td> --}}
 
 
-
-                            <td class="px-4 py-3 flex items-center justify-center">
-                                <div class="flex flex-row items-center justify-center gap-2">
-
-                                    <a href="{{ route('permissions.edit', $permission) }}"
-                                        class="flex items-center justify-center text-xs
+                            @if (auth()->user()->can('edit permission') || auth()->user()->can('delete permission'))
+                                {{-- @canany(['edit permission', 'delete permission']) --}}
+                                <td class="px-4 py-3 flex items-center justify-center">
+                                    <div class="flex flex-row items-center justify-center gap-2">
+                                        @can('edit permission')
+                                            <a href="{{ route('permissions.edit', $permission) }}"
+                                                class="flex items-center justify-center text-xs
                                             hover:text-green-500 hover:bg-gray-200/25 hover:rounded-md
                                             p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-square-pen-icon lucide-square-pen">
-                                            <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                            <path
-                                                d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
-                                        </svg>
-                                    </a>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-square-pen-icon lucide-square-pen">
+                                                    <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                    <path
+                                                        d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+                                                </svg>
+                                            </a>
+                                        @endcan
 
+                                        @can('delete permission')
+                                            {{-- @if ($role->name !== 'admin') --}}
 
-                                    <a href="javascript:void(0)" {{-- wire:click="$dispatch('delete-confirm', { id: {{ $permission->id }} })" --}}
-                                        wire:click="delete('{{ $permission->id }}')"
-                                        class="flex items-center justify-center text-xs
+                                            <a href="javascript:void(0)" {{-- wire:click="$dispatch('delete-confirm', { id: {{ $permission->id }} })" --}}
+                                                wire:click="delete('{{ $permission->id }}')"
+                                                class="flex items-center justify-center text-xs
                                             hover:text-red-500 hover:bg-gray-200/25 hover:rounded-md
                                             p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-trash-icon lucide-trash">
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                                            <path d="M3 6h18" />
-                                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                                        </svg>
-                                    </a>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-trash-icon lucide-trash">
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                    <path d="M3 6h18" />
+                                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                </svg>
+                                            </a>
+                                        @endcan
 
-                                </div>
-                            </td>
+
+
+                                    </div>
+                                </td>
+                            @endif
+
                         </tr>
 
                     @empty

@@ -12,6 +12,17 @@ class PermissionsCreate extends Component
     public $permissionName = '';
     public $guardName = '';
 
+
+
+
+
+    public function mount()
+    {
+        // Authorization check for creating a permission
+        $this->authorize('create', Permission::class);
+    }
+
+
     public function createPermission()
     {
         $this->validate([
@@ -26,10 +37,7 @@ class PermissionsCreate extends Component
             'guard_name' => $this->guardName
         ]);
 
-        // $this->dispatch('created',  message: $role->name . '  ' . __('Role Created Successfully'), type: 'success');
-        // LivewireAlert::title($this->permissionName . '  ' . __('Permission Created Successfully'))
-        //     ->success()
-        //     ->show();
+
 
         notify($role->name . '  ' . __('Permission Created Successfully'), 'success', false);
 

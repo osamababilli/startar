@@ -53,6 +53,11 @@ class PermissionsIndex extends Component
 
     public function render()
     {
+
+        // Authorization check for viewing any permissions
+        $this->authorize('viewAny', Permission::class);
+
+
         $permissions = $this->getData();
         return view('livewire.permissions.permissions-index', compact('permissions'));
         //

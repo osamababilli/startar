@@ -12,10 +12,19 @@ class PermissionsEdit extends Component
 
     public function mount($permission)
     {
+
+
+
+
+
         $this->permission = $permission;
         $this->permissionData = Permission::find($permission);
         $this->PermissionName = $this->permissionData->name;
         $this->guardName = $this->permissionData->guard_name;
+
+
+        // Authorization check for editing a permission
+        $this->authorize('update', Permission::class);
     }
 
 
