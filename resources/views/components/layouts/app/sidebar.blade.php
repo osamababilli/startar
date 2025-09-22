@@ -74,6 +74,16 @@
             </flux:navlist>
 
             <flux:spacer />
+            @can('view activity logs')
+                <flux:navlist variant="outline">
+                    <flux:navlist.item icon="folder-git-2" :href="route('activity-logs.index')" wire:navigate
+                        :current="request()->routeIs('activity-logs.index')">
+                        {{ __('Activity Logs') }}
+                    </flux:navlist.item>
+
+
+                </flux:navlist>
+            @endcan
 
             <!-- User dropdown (desktop) -->
 

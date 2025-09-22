@@ -17,7 +17,11 @@ class roles_permission extends Seeder
         // إنشاء الأدوار
 
 
-        $role =   Role::create(['name' => 'super admin', 'guard_name' => 'web']);
+        if (!Role::where('name', 'super admin')->exists()) {
+            $role = Role::create(['name' => 'super admin', 'guard_name' => 'web']);
+        } else {
+            $role = Role::where('name', 'super admin')->first();
+        }
 
         $permissions = [
 
@@ -48,8 +52,10 @@ class roles_permission extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            \Spatie\Permission\Models\Permission::create(['name' => $permission, 'guard_name' => 'web']);
-            $role->givePermissionTo($permission);
+            if (!\Spatie\Permission\Models\Permission::where('name', $permission)->exists()) {
+                $perm = \Spatie\Permission\Models\Permission::create(['name' => $permission, 'guard_name' => 'web']);
+                $role->givePermissionTo($perm);
+            }
         }
 
 
