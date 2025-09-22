@@ -29,6 +29,7 @@ class UsersIndex extends Component
         $query = User::query();
 
         if ($this->search) {
+            $this->resetPage();
             $query->where('name', 'like', '%' . $this->search . '%');
         }
         return $query->where('name', 'like', '%' . $this->search . '%')->orderBy('created_at', $this->sortDirection)->paginate($this->perPage);

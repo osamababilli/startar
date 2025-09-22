@@ -23,6 +23,7 @@ class PermissionsIndex extends Component
         $query = Permission::query();
 
         if ($this->search) {
+            $this->resetPage();
             $query->where('name', 'like', '%' . $this->search . '%');
         }
         return $query->where('name', 'like', '%' . $this->search . '%')->orderBy('created_at', $this->sortDirection)->paginate($this->perPage);
