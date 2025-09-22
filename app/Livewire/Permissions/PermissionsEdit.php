@@ -4,6 +4,7 @@ namespace App\Livewire\Permissions;
 
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
+use Spatie\Activitylog\Models\Activity;
 
 class PermissionsEdit extends Component
 {
@@ -48,6 +49,10 @@ class PermissionsEdit extends Component
             'guard_name' => $this->guardName,
 
         ]);
+
+
+
+
 
         //إذا تريد الإشعار يظهر بعد redirect
         notify(__('Permission Updated Successfully'), 'success', false);

@@ -12,6 +12,8 @@ use App\Livewire\Users\UserCreate;
 use App\Livewire\Users\UserEdit;
 use App\Livewire\Users\UsersIndex;
 use App\Livewire\Users\UserShow;
+use App\Livewire\Logs\LogsPage;
+
 
 
 Route::get('/', function () {
@@ -44,6 +46,9 @@ Route::middleware(['auth', 'verified', 'statusCheck'])->group(function () {
     Route::get('users/create', UserCreate::class)->name('users.create');
     Route::get('users/show/{user}', UserShow::class)->name('users.show');
     Route::get('users/edit/{user}', UserEdit::class)->name('users.edit');
+
+    // Activity Logs Routes
+    Route::get('activity-logs', LogsPage::class)->name('activity-logs.index');
 });
 
 require __DIR__ . '/auth.php';

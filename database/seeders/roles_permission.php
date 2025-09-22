@@ -42,6 +42,9 @@ class roles_permission extends Seeder
             'view permissions',
 
 
+            'view activity logs',
+
+
         ];
 
         foreach ($permissions as $permission) {
