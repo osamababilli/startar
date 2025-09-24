@@ -49,6 +49,19 @@ class roles_permission extends Seeder
             'view activity logs',
 
 
+            'view languages',
+            'create language',
+            'edit language',
+            'delete language',
+            'set default language',
+
+            'view translations',
+            'edit translations',
+            'import translations',
+            'export translations',
+            'publish translations',
+
+
         ];
 
         foreach ($permissions as $permission) {
