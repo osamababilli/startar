@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Languages\LanguageIndex;
 use App\Livewire\Permissions\PermissionsCreate;
 use App\Livewire\Permissions\PermissionsEdit;
 use Livewire\Volt\Volt;
@@ -49,6 +50,11 @@ Route::middleware(['auth', 'verified', 'statusCheck'])->group(function () {
 
     // Activity Logs Routes
     Route::get('activity-logs', LogsPage::class)->name('activity-logs.index');
+
+
+    // language routes
+
+    Route::get('languages', LanguageIndex::class)->name('languages.index');
 });
 
 require __DIR__ . '/auth.php';
