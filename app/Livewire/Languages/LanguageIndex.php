@@ -20,10 +20,47 @@ class LanguageIndex extends Component
     public $sortDirection = 'desc';
 
 
-    public function saveLanguage()
+    public function edit($language)
+    {
+        // dd($Language);
+        // dd('edit' . $Language);
+        $this->dispatch('editLanguage', language: $language);
+    }
+
+
+    #[On('refresh')]
+    public function refresh()
+    {
+
+        $this->render(); // Reset to the first page
+    }
+
+    public function delete(string $id)
+    {
+
+        confermeDelete(
+            $this,
+            __('Are you sure'),
+            __('Are you sure you want to delete this language?'),
+            $id
+        );
+    }
+
+    #[On('delete-confirmted')]
+    public function deleteConfirmted(string $id)
     {
 
 
+        $item = Language::find($id);
+        $item->delete();
+        // $this->dispatch('deleted',  message: $item->name . '  ' . __('item Deleted Successfully'), type: 'success');
+
+        notify($item->name . '  ' . __('language Deleted Successfully'), 'success', false);
+    }
+
+
+    public function saveLanguage()
+    {
 
         $this->validate([
             'name' => 'required|string|max:255',
@@ -35,13 +72,21 @@ class LanguageIndex extends Component
 
         Flux::modal('languageFormModal')->close();
 
-        Language::create([
+
+
+        $language =  Language::create([
             'name' => $this->name,
             'code' => $this->code,
             'direction' => $this->direction,
             'is_active' => $this->is_active,
             'is_default' => $this->is_default,
         ]);
+
+        if ($this->is_default) {
+
+            Language::where('is_default', true)->where('id', '!=', $language->id)->update(['is_default' => false]);
+            $language->update(['is_default' => true]);
+        }
 
         notify(__('Language Created Successfully'), 'success', false);
 
@@ -64,27 +109,7 @@ class LanguageIndex extends Component
 
 
 
-    public function delete(string $id)
-    {
 
-        confermeDelete(
-            $this,
-            __('Are you sure'),
-            __('Are you sure you want to delete this language?'),
-            $id
-        );
-    }
-
-    #[On('delete-confirmted')]
-    public function deleteConfirmted(string $id)
-    {
-
-
-        $language = Language::find($id);
-        $language->delete();
-
-        notify($language->name . '  ' . __('Language Deleted Successfully'), 'success', false);
-    }
 
 
 

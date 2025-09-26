@@ -144,7 +144,7 @@
 
         </div>
 
-
+        <livewire:languages.language-edit />
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-zinc-400 dark:border-gray-700 rounded-md">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-700  dark:text-zinc-400">
@@ -193,7 +193,9 @@
                             <td class="px-4 py-3 flex items-center justify-center">
                                 <div class="flex flex-row items-center justify-center gap-2">
 
-                                    <a href="{{ route('roles.edit', $language) }}"
+                                    <a href="javascript:void(0)"
+                                        wire:click="$dispatch( 'editLanguage', { id: {{ $language->id }} })"
+                                        {{-- هون عم بنرسل الحدث مع باراميتر اسمه language (بحروف صغيرة) --}} {{-- wire:click="updateLanguage('{{ $language->id }}')" --}}
                                         class="flex items-center justify-center text-xs
                                             hover:text-green-500 hover:bg-gray-200/25 hover:rounded-md
                                             p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
