@@ -39,8 +39,9 @@
                   focus:outline-none focus:ring-2 focus:ring-zinc-300">
                                 <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2
-                                                              0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                                    <path clip-rule="evenodd" fill-rule="evenodd"
+                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2
+                                                                                                          0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
                                 {{ __('Add New Language') }}
                             </a>
@@ -204,6 +205,26 @@
 
                                 <div class="flex flex-row items-center justify-center gap-2">
                                     @can('edit language')
+                                        <a href="{{ route('translations.index', $language->code) }}"
+                                            class="flex items-center justify-center text-xs
+                                            hover:text-green-500 hover:bg-gray-200/25 hover:rounded-md
+                                            p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-languages-icon lucide-languages">
+                                                <path d="m5 8 6 6" />
+                                                <path d="m4 14 6-6 2-3" />
+                                                <path d="M2 5h12" />
+                                                <path d="M7 2h1" />
+                                                <path d="m22 22-5-10-5 10" />
+                                                <path d="M14 18h6" />
+                                            </svg>
+                                        </a>
+                                    @endcan
+
+
+                                    @can('edit language')
                                         {{-- زر التعديل --}}
                                         <a href="javascript:void(0)"
                                             wire:click="$dispatch( 'editLanguage', { id: {{ $language->id }} })"
@@ -221,6 +242,7 @@
                                             </svg>
                                         </a>
                                     @endcan
+
 
 
                                     @can('delete language')

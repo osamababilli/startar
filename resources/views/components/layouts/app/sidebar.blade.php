@@ -83,18 +83,7 @@
 
                         </flux:navlist>
 
-                        <flux:navlist.group expandable :expanded="false" heading="{{ __('Permissions') }}">
-                            <flux:navlist.item :href="route('permissions.index')"
-                                :current="request()->routeIs('permissions.index')" wire:navigate>
-                                {{ __('All Permissions') }}
-                            </flux:navlist.item>
-                            @can('create permission')
-                                <flux:navlist.item :href="route('permissions.create')"
-                                    :current="request()->routeIs('permissions.create')" wire:navigate>
-                                    {{ __('Create New Permission') }}
-                                </flux:navlist.item>
-                            @endcan
-                        </flux:navlist.group>
+
                     </flux:navlist.group>
                 @endif
 

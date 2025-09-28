@@ -56,7 +56,7 @@ Route::middleware(['auth', 'verified', 'statusCheck'])->group(function () {
     Route::get('languages', LanguageIndex::class)->name('languages.index');
 
     // Translation Routes
-    Route::get('languages/{locale}/translations', TranslationsManager::class);
+    Route::get('languages/{locale}/translations', TranslationsManager::class)->name('translations.index');
 });
 
 require __DIR__ . '/auth.php';
