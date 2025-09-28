@@ -71,6 +71,33 @@
                         </flux:navlist.group>
                     </flux:navlist.group>
                 @endif
+
+                @if (auth()->user()->can('view languages') || auth()->user()->can('view translations'))
+                    <flux:navlist.group :heading="__('Languages & Translations')" class="mt-3 space-y-1">
+                        <flux:navlist variant="outline">
+                            <flux:navlist.item icon="languages" :href="route('languages.index')" wire:navigate
+                                :current="request()->routeIs('languages.index')">
+                                {{ __('Languages') }}
+                            </flux:navlist.item>
+
+
+                        </flux:navlist>
+
+                        <flux:navlist.group expandable :expanded="false" heading="{{ __('Permissions') }}">
+                            <flux:navlist.item :href="route('permissions.index')"
+                                :current="request()->routeIs('permissions.index')" wire:navigate>
+                                {{ __('All Permissions') }}
+                            </flux:navlist.item>
+                            @can('create permission')
+                                <flux:navlist.item :href="route('permissions.create')"
+                                    :current="request()->routeIs('permissions.create')" wire:navigate>
+                                    {{ __('Create New Permission') }}
+                                </flux:navlist.item>
+                            @endcan
+                        </flux:navlist.group>
+                    </flux:navlist.group>
+                @endif
+
             </flux:navlist>
 
             <flux:spacer />

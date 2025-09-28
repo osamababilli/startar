@@ -23,59 +23,64 @@
             </div>
             <div class="w-full flex flex-row md:flex-row md:items-center md:justify-end gap-2 md:gap-3">
 
-                <!-- زر إنشاء دور -->
-                <div class="w-full md:w-auto">
 
-                    <flux:modal.trigger name="languageFormModal">
+                @can('create language')
+                    <!-- زر إنشاء دور -->
+                    <div class="w-full md:w-auto">
+
+                        <flux:modal.trigger name="languageFormModal">
 
 
-                        <a href="javascript:void(0)"
-                            class="w-full md:w-auto flex items-center justify-center gap-2
+                            <a href="javascript:void(0)"
+                                class="w-full md:w-auto flex items-center justify-center gap-2
                   text-white bg-zinc-700 hover:bg-zinc-600
                   dark:bg-zinc-600 dark:hover:bg-zinc-700 dark:text-white
                   rounded-lg text-sm px-4 py-2 font-medium
                   focus:outline-none focus:ring-2 focus:ring-zinc-300">
-                            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2
-                      0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-                            </svg>
-                            {{ __('Add New Language') }}
-                        </a>
-                    </flux:modal.trigger>
-                </div>
-
-
-
-                <flux:modal name="languageFormModal" class="w-full md:w-1/2" :dismissible="false">
-                    <div class="space-y-6">
-                        <div>
-                            <flux:heading size="lg">{{ __('Add New Language') }}</flux:heading>
-
-                        </div>
-                        <flux:input wire:model.live="name" label="{{ __('Name') }}"
-                            placeholder="{{ __('Language Name') }}" />
-
-                        <flux:input wire:model.live="code" label="{{ __('Code') }}"
-                            placeholder="{{ __('Language Code (e.g., en, fr, ar)') }}" />
-
-                        <flux:select wire:model.live="direction" label="{{ __('Direction') }}">
-                            <option value="ltr">{{ __('Left to Right (LTR)') }}</option>
-                            <option value="rtl">{{ __('Right to Left (RTL)') }}</option>
-                        </flux:select>
-
-
-                        <flux:checkbox wire:model.live="is_active" label="{{ __('Active') }}" />
-                        <flux:checkbox wire:model.live="is_default" label="{{ __('Default') }}" />
-                        <div class="flex">
-                            <flux:spacer />
-                            <flux:button type="submit" wire:loading.attr="disabled" wire:target="saveLanguage"
-                                wire:click="saveLanguage" variant="primary">{{ __('Save') }}
-                            </flux:button>
-                        </div>
+                                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2
+                                                              0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                                </svg>
+                                {{ __('Add New Language') }}
+                            </a>
+                        </flux:modal.trigger>
                     </div>
-                </flux:modal>
 
+
+
+                    <flux:modal name="languageFormModal" class="w-full md:w-1/2" :dismissible="false">
+                        <div class="space-y-6">
+                            <div>
+                                <flux:heading size="lg">{{ __('Add New Language') }}</flux:heading>
+
+                            </div>
+                            <flux:input wire:model.live="name" label="{{ __('Name') }}"
+                                placeholder="{{ __('Language Name') }}" />
+
+                            <flux:input wire:model.live="code" label="{{ __('Code') }}"
+                                placeholder="{{ __('Language Code (e.g., en, fr, ar)') }}" />
+
+                            <flux:select wire:model.live="direction" label="{{ __('Direction') }}">
+                                <option value="ltr">{{ __('Left to Right (LTR)') }}</option>
+                                <option value="rtl">{{ __('Right to Left (RTL)') }}</option>
+                            </flux:select>
+
+
+                            <flux:checkbox wire:model.live="is_active" label="{{ __('Active') }}" />
+
+                            @can('set default language')
+                                <flux:checkbox wire:model.live="is_default" label="{{ __('Default') }}" />
+                            @endcan
+                            <div class="flex">
+                                <flux:spacer />
+                                <flux:button type="submit" wire:loading.attr="disabled" wire:target="saveLanguage"
+                                    wire:click="saveLanguage" variant="primary">{{ __('Save') }}
+                                </flux:button>
+                            </div>
+                        </div>
+                    </flux:modal>
+                @endcan
 
 
 
@@ -154,9 +159,13 @@
                         <th scope="col" class="px-4 py-3">{{ __('Direction') }}</th>
                         <th scope="col" class="px-4 py-3">{{ __('Active') }}</th>
                         <th scope="col" class="px-4 py-3">{{ __('Default') }}</th>
-                        <th scope="col" class="px-4 py-3 text-center">
-                            {{ __('Actions') }}
-                        </th>
+
+                        @if (auth()->user()->can('edit language') || auth()->user()->can('delete language'))
+                            <th scope="col" class="px-4 py-3 text-center">
+                                {{ __('Actions') }}
+                            </th>
+                        @endif
+
                     </tr>
                 </thead>
                 <tbody>
@@ -191,38 +200,46 @@
 
 
                             <td class="px-4 py-3 flex items-center justify-center">
-                                <div class="flex flex-row items-center justify-center gap-2">
 
-                                    <a href="javascript:void(0)"
-                                        wire:click="$dispatch( 'editLanguage', { id: {{ $language->id }} })"
-                                        {{-- هون عم بنرسل الحدث مع باراميتر اسمه language (بحروف صغيرة) --}} {{-- wire:click="updateLanguage('{{ $language->id }}')" --}}
-                                        class="flex items-center justify-center text-xs
+
+                                <div class="flex flex-row items-center justify-center gap-2">
+                                    @can('edit language')
+                                        {{-- زر التعديل --}}
+                                        <a href="javascript:void(0)"
+                                            wire:click="$dispatch( 'editLanguage', { id: {{ $language->id }} })"
+                                            {{-- هون عم بنرسل الحدث مع باراميتر اسمه language (بحروف صغيرة) --}} {{-- wire:click="updateLanguage('{{ $language->id }}')" --}}
+                                            class="flex items-center justify-center text-xs
                                             hover:text-green-500 hover:bg-gray-200/25 hover:rounded-md
                                             p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-square-pen-icon lucide-square-pen">
-                                            <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                            <path
-                                                d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
-                                        </svg>
-                                    </a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-square-pen-icon lucide-square-pen">
+                                                <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                <path
+                                                    d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+                                            </svg>
+                                        </a>
+                                    @endcan
 
 
-                                    <a href="javascript:void(0)" wire:click="delete('{{ $language->id }}')"
-                                        class="flex items-center justify-center text-xs
+                                    @can('delete language')
+                                        {{-- زر الحذف --}}
+                                        <a href="javascript:void(0)" wire:click="delete('{{ $language->id }}')"
+                                            class="flex items-center justify-center text-xs
                                             hover:text-red-500 hover:bg-gray-200/25 hover:rounded-md
                                             p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-trash-icon lucide-trash">
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                                            <path d="M3 6h18" />
-                                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                                        </svg>
-                                    </a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-trash-icon lucide-trash">
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                <path d="M3 6h18" />
+                                                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                            </svg>
+                                        </a>
+                                    @endcan
+
 
                                 </div>
                             </td>

@@ -204,7 +204,7 @@
                     @empty
 
                         <tr>
-                            <td colspan="3" class="px-4 py-12 text-center ">
+                            <td colspan="6" class="px-4 py-12 text-center ">
                                 <div class="flex flex-row items-center justify-center gap-2">
                                     <span>
                                         <svg class="w-8 h-8 text-gray-400" aria-hidden="true" fill="none"

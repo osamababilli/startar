@@ -21,10 +21,17 @@
 
 
             <flux:input type="password" autocomplete="new-password" label="{{ __('Password') }}"
-                wire:model.blur="password" />
+                wire:model.blur="password" viewable />
 
             <flux:input type="password" label="{{ __('Password Confirmation') }}"
-                wire:model.blur="password_confirmation" />
+                wire:model.blur="password_confirmation" viewable />
+
+            <flux:select wire:model="UserStatus" placeholder="Choose industry...">
+                <flux:select.option value="active">{{ __('Active') }}</flux:select.option>
+                <flux:select.option value="inactive">{{ __('Inactive') }}</flux:select.option>
+
+            </flux:select>
+
 
             <flux:button type="submit" class="hover:pointer">
                 {{ __('Update User') }}

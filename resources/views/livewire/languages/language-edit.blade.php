@@ -17,7 +17,9 @@
 
 
             <flux:checkbox wire:model.live="is_active" label="{{ __('Active') }}" />
-            <flux:checkbox wire:model.live="is_default" label="{{ __('Default') }}" />
+            @can('set default language')
+                <flux:checkbox wire:model.live="is_default" label="{{ __('Default') }}" />
+            @endcan
             <div class="flex">
                 <flux:spacer />
                 <flux:button type="submit" wire:loading.attr="disabled" wire:target="updateLanguage"

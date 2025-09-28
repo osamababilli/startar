@@ -20,10 +20,10 @@
 
 
             <flux:input type="password" autocomplete="new-password" label="{{ __('Password') }}"
-                wire:model.blur="password" />
+                wire:model.blur="password" viewable />
 
             <flux:input type="password" label="{{ __('Password Confirmation') }}"
-                wire:model.blur="password_confirmation" />
+                wire:model.blur="password_confirmation" viewable />
 
             <flux:button type="submit" class="hover:pointer">
                 {{ __('Create User') }}

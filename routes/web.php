@@ -14,8 +14,8 @@ use App\Livewire\Users\UserEdit;
 use App\Livewire\Users\UsersIndex;
 use App\Livewire\Users\UserShow;
 use App\Livewire\Logs\LogsPage;
-
-
+use App\Livewire\Translations\TranslationsManager;
+use App\Models\Translation;
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,8 +53,10 @@ Route::middleware(['auth', 'verified', 'statusCheck'])->group(function () {
 
 
     // language routes
-
     Route::get('languages', LanguageIndex::class)->name('languages.index');
+
+    // Translation Routes
+    Route::get('languages/{locale}/translations', TranslationsManager::class);
 });
 
 require __DIR__ . '/auth.php';

@@ -80,5 +80,18 @@ class roles_permission extends Seeder
         ]);
 
         $user->assignRole('super admin');
+
+
+
+        $langs = [
+            ['name' => 'English', 'code' => 'en', 'is_default' => true, 'direction' => 'ltr', 'is_active' => true],
+            ['name' => 'Arabic', 'code' => 'ar', 'is_default' => false, 'direction' => 'rtl', 'is_active' => true],
+        ];
+
+        foreach ($langs as $lang) {
+            if (!\App\Models\Language::where('code', $lang['code'])->exists()) {
+                \App\Models\Language::create($lang);
+            }
+        }
     }
 }

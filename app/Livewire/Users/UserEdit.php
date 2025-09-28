@@ -37,7 +37,7 @@ class UserEdit extends Component
         $this->name = $userData->name;
         $this->email = $userData->email;
         $this->phone = $userData->phone;
-        $this->UserStatus = $userData->status === 'active' ? true : false;
+        $this->UserStatus = $userData->status;
         $this->selectedRoles = $userData->roles->pluck('name')->toArray();
     }
 
@@ -50,7 +50,7 @@ class UserEdit extends Component
         $this->user->name = $this->name;
         $this->user->email = $this->email;
         $this->user->phone = $this->phone;
-        $this->user->status = $this->UserStatus ? 'active' : 'inactive';
+        $this->user->status = $this->UserStatus;
 
         if (!empty($this->password)) {
             $this->validate([
