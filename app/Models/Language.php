@@ -43,4 +43,8 @@ class Language extends Model
     {
         return $this->hasMany(Translation::class, 'locale', 'code');
     }
+    public static function getDefaultDirection()
+    {
+        return self::where('is_default', true)->first()?->direction ?? 'ltr';
+    }
 }

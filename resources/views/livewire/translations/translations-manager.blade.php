@@ -114,12 +114,12 @@
 
         </div>
         {{-- start coding here --}}
-        <flux:modal name="edit-translation" class="md:w-96">
+        <flux:modal name="edit-translation" class="md:w-1/2">
             <div class="space-y-6">
                 <div>
                     <flux:heading size="lg">{{ __('Edit Translation') }} </flux:heading>
                 </div>
-                <flux:input label="value" placeholder="{{ __('value') }}" wire:model="value" />
+                <flux:textarea label="value" placeholder="{{ __('value') }}" wire:model="value" />
                 <div class="flex">
                     <flux:spacer />
                     <flux:button type="submit" wire:click="update" variant="primary">{{ __('Save') }}</flux:button>

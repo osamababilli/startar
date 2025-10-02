@@ -41,7 +41,7 @@
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clip-rule="evenodd" fill-rule="evenodd"
                                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2
-                                                                                                          0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                                                                                                                                                                                          0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
                                 {{ __('Add New Language') }}
                             </a>
@@ -223,25 +223,24 @@
                                         </a>
                                     @endcan
 
-
                                     @can('edit language')
-                                        {{-- زر التعديل --}}
                                         <a href="javascript:void(0)"
-                                            wire:click="$dispatch( 'editLanguage', { id: {{ $language->id }} })"
-                                            {{-- هون عم بنرسل الحدث مع باراميتر اسمه language (بحروف صغيرة) --}} {{-- wire:click="updateLanguage('{{ $language->id }}')" --}}
+                                            x-on:click="$dispatch('open-language-edit', @js($language))"
                                             class="flex items-center justify-center text-xs
-                                            hover:text-green-500 hover:bg-gray-200/25 hover:rounded-md
-                                            p-1.5 transition-[color,background-color,border-radius] duration-200 ease-in-out">
+                                            hover:text-green-500 hover:bg-gray-200/25
+                                            hover:rounded-md p-1.5 transition duration-200 ease-in-out">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                                class="lucide lucide-square-pen-icon lucide-square-pen">
+                                                class="lucide lucide-square-pen">
                                                 <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                                                 <path
                                                     d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
                                             </svg>
                                         </a>
                                     @endcan
+
+
 
 
 

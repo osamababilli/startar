@@ -8,12 +8,26 @@ use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
 use App\Models\Language;
 
+
 class LanguageEdit extends Component
 {
     public $id, $name, $code, $direction, $is_active, $is_default, $language;
 
-    public function updateLanguage()
+    public function updateLanguage($data)
     {
+
+
+
+
+        $this->id = $data['id'];
+        $this->name = $data['name'];
+        $this->code = $data['code'];
+        $this->direction = $data['direction'];
+        $this->is_active = $data['is_active'];
+        $this->is_default = $data['is_default'];
+
+        $this->language = Language::findOrFail($this->id);
+
 
         // dd($this->language);
         $this->validate([
@@ -32,8 +46,9 @@ class LanguageEdit extends Component
 
         if ($this->is_default) {
             $this->language->makeDefault();
+            cache()->forget('default_language');
         }
-        // استخدام $this->language بدل $language
+
         $this->language->update([
             'name' => $this->name,
             'code' => $this->code,
@@ -52,21 +67,31 @@ class LanguageEdit extends Component
         $this->dispatch('refresh');
     }
 
-    #[On('editLanguage')]
-    public function edit($id)
+    // #[On('editLanguage')]
+    // public function edit($id)
+    // {
+    //     $language = Language::findOrFail($id); // أفضل استخدام findOrFail
+
+    //     $this->language = $language;
+    //     $this->id = $language->id; // لتسهيل الفاليديشن
+    //     $this->name = $language->name;
+    //     $this->code = $language->code;
+    //     $this->direction = $language->direction;
+    //     $this->is_active = $language->is_active;
+    //     $this->is_default = $language->is_default;
+
+    //     Flux::modal('languageEditModal')->show();
+    // }
+
+
+    // #[On('editLanguage')]
+    public function edit($language)
     {
-        $language = Language::findOrFail($id); // أفضل استخدام findOrFail
-
-        $this->language = $language;
-        $this->id = $language->id; // لتسهيل الفاليديشن
-        $this->name = $language->name;
-        $this->code = $language->code;
-        $this->direction = $language->direction;
-        $this->is_active = $language->is_active;
-        $this->is_default = $language->is_default;
-
-        Flux::modal('languageEditModal')->show();
+        // dd($language);
+        // $this->fill($language);
+        // Flux::modal('languageEditModal')->show();
     }
+
 
     public function render()
     {
