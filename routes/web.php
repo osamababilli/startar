@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified', 'statusCheck'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+    Volt::route('settings/languages', 'settings.languages')->name('settings.languages');
 
     // roles & permissions routes
     Route::get('roles', Index::class)->name('roles.index');
