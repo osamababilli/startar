@@ -41,7 +41,7 @@
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clip-rule="evenodd" fill-rule="evenodd"
                                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2
-                                                                                                                                                                                          0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                                                                                                                                                                                                                          0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
                                 {{ __('Add New Language') }}
                             </a>
@@ -152,7 +152,7 @@
 
         <livewire:languages.language-edit />
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-zinc-400 dark:border-gray-700 rounded-md">
+            <table class="w-full text-sm text-center text-gray-500 dark:text-zinc-400 dark:border-gray-700 rounded-md">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-700  dark:text-zinc-400">
                     <tr>
                         <th scope="col" class="px-4 py-3">{{ __('Name') }}</th>
@@ -182,19 +182,25 @@
 
 
                             <td class="px-4 py-3">
-                                @if ($language->is_active)
-                                    <flux:icon name="circle-check-big" class="text-green-500 w-6 h-6 text-center" />
-                                @else
-                                    <flux:icon name="circle-x" class="text-red-500 w-6 h-6" />
-                                @endif
+                                <div class="flex flex-row items-center justify-center gap-2">
+                                    @if ($language->is_active)
+                                        <flux:icon name="circle-check-big"
+                                            class="text-green-500 w-6 h-6 text-center" />
+                                    @else
+                                        <flux:icon name="circle-x" class="text-red-500 w-6 h-6" />
+                                    @endif
+                                </div>
                             </td>
 
                             <td class="px-4 py-3">
-                                @if ($language->is_default)
-                                    <flux:icon name="circle-check-big" class="text-green-500 w-6 h-6 text-center" />
-                                @else
-                                    <flux:icon name="circle-x" class="text-red-500 w-6 h-6" />
-                                @endif
+                                <div class="flex flex-row items-center justify-center gap-2">
+                                    @if ($language->is_default)
+                                        <flux:icon name="circle-check-big"
+                                            class="text-green-500 w-6 h-6 text-center" />
+                                    @else
+                                        <flux:icon name="circle-x" class="text-red-500 w-6 h-6" />
+                                    @endif
+                                </div>
                             </td>
 
 

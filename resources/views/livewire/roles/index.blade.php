@@ -107,11 +107,11 @@
 
 
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-zinc-400 dark:border-gray-700 rounded-md">
+            <table class="w-full text-sm text-center text-gray-500 dark:text-zinc-400 dark:border-gray-700 rounded-md">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-700  dark:text-zinc-400">
                     <tr>
-                        <th scope="col" class="px-4 py-3">{{ __('Role Name') }}</th>
-                        <th scope="col" class="px-4 py-3">{{ __('Guard Name') }}</th>
+                        <th scope="col" class="px-4 py-3 text-center">{{ __('Role Name') }}</th>
+                        <th scope="col" class="px-4 py-3 text-center">{{ __('Guard Name') }}</th>
                         <th scope="col" class="px-4 py-3 text-center">
                             {{ __('Actions') }}
                         </th>

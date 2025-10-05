@@ -107,7 +107,7 @@
 
 
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-zinc-400 dark:border-gray-700 rounded-md">
+            <table class="w-full text-sm text-center text-gray-500 dark:text-zinc-400 dark:border-gray-700 rounded-md">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-700  dark:text-zinc-400">
                     <tr>
                         <th scope="col" class="px-4 py-3">{{ __('Name') }}</th>
@@ -132,12 +132,15 @@
                                 {{ $user->name }}</th>
 
                             <td class="px-4 py-3">{{ $user->email }}</td>
-                            <td class="px-4 py-3">
-                                @if ($user->email_verified_at)
-                                    <flux:icon name="circle-check-big" class="text-green-500 w-6 h-6 text-center" />
-                                @else
-                                    <flux:icon name="circle-x" class="text-red-500 w-6 h-6" />
-                                @endif
+                            <td class="px-4 py-3 ">
+                                <div class="flex justify-center items-center">
+                                    @if ($user->email_verified_at)
+                                        <flux:icon name="circle-check-big"
+                                            class="text-green-500 w-6 h-6 text-center flex items-center" />
+                                    @else
+                                        <flux:icon name="circle-x" class="text-red-500 w-6 h-6 flex items-center" />
+                                    @endif
+                                </div>
                             </td>
 
 
@@ -151,11 +154,14 @@
                             </td>
 
                             <td class="px-4 py-3">
-                                @if ($user->status === 'active')
-                                    <flux:icon name="circle-check-big" class="text-green-500 w-6 h-6 text-center" />
-                                @else
-                                    <flux:icon name="circle-x" class="text-red-500 w-6 h-6" />
-                                @endif
+                                <div class="flex justify-center items-center">
+                                    @if ($user->status === 'active')
+                                        <flux:icon name="circle-check-big"
+                                            class="text-green-500 w-6 h-6 text-center" />
+                                    @else
+                                        <flux:icon name="circle-x" class="text-red-500 w-6 h-6" />
+                                    @endif
+                                </div>
                             </td>
 
 
