@@ -18,7 +18,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'statusCheck' => UserCheckActive::class
         ]);
-        $middleware->append(SetLocale::class);
+        // إضافة SetLocale للـ web middleware group
+        $middleware->web(append: [
+            SetLocale::class,
+        ]); // إضافة SetLocale للـ web middleware group
+
     })
 
     ->withExceptions(function (Exceptions $exceptions) {

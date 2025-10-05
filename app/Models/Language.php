@@ -45,6 +45,10 @@ class Language extends Model
     }
     public static function getDefaultDirection()
     {
+
+        if (session()->has('locale')) {
+            return self::where('code', session('locale'))->first()->direction;
+        }
         return self::where('is_default', true)->first()?->direction ?? 'ltr';
     }
 }

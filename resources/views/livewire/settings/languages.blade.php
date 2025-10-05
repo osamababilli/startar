@@ -3,18 +3,25 @@
 use Livewire\Volt\Component;
 
 new class extends Component {
-    public $languages, $language, $dufault;
+    public $languages, $language, $default, $languageCode;
 
     public function mount()
     {
         $this->languages = App\Models\Language::where('is_active', 1)->get();
-        $this->dufault = App\Models\Language::where('is_default', 1)->first();
-        // $dufault = $this->language = session()->get('locale') ?? $dufault->code;
+        $this->default = App\Models\Language::where('is_default', 1)->first();
+        $this->languageCode = session()->get('locale') ?? $this->default->code;
     }
-    public function setLanguage($languageCode)
+
+    public function setLanguage()
     {
-        session(['locale' => $this->language]);
-        app()->setLocale($this->language); // لتطبيق اللغة فورًا
+        // dd($this->languageCode);
+        // حفظ اللغة في الجلسة
+        session(['locale' => $this->languageCode]);
+        // dd(session('locale'));
+        // تطبيق اللغة فورًا
+        app()->setLocale($this->languageCode);
+
+        // إعادة تحميل الصفحة لتطبيق التغييرات
         return redirect()->route('settings.languages');
     }
 }; ?>
@@ -22,18 +29,19 @@ new class extends Component {
 <section class="w-full">
     @include('partials.settings-heading')
 
-    {{-- @dd($language); --}}
     <x-settings.layout :heading="__('Languages')" :subheading="__('Update the appearance settings for your account')">
-        <form wire:submit.prevent="setLanguage($event.target.value)">
 
-            <flux:radio.group>
+
+
+        <form wire:submit.prevent="setLanguage">
+
+            <flux:radio.group wire:model.live="languageCode">
                 @foreach ($languages as $language)
                     <flux:radio value="{{ $language->code }}" label="{{ $language->name }}"
-                        :checked="$language->code == $dufault->code" />
+                        :checked="$language->code == $languageCode" />
                 @endforeach
-
-
             </flux:radio.group>
+
             <flux:button type="submit" class="cursor-pointer mt-4" size="sm" variant="primary">
                 {{ __('Save') }}
             </flux:button>
