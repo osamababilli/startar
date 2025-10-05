@@ -15,6 +15,7 @@
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
 
 @custom-variant dark (&:where(.dark, .dark *));
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
 
 @theme {
     --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
@@ -44,6 +45,10 @@
         --color-accent-content: var(--color-white);
         --color-accent-foreground: var(--color-neutral-800);
     }
+}
+
+[dir="rtl"] {
+    font-family: "Tajawal", sans-serif;
 }
 
 @layer base {
